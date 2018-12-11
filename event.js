@@ -29,6 +29,7 @@ eventEmitter.on('end', (name) => {
 
 eventEmitter.emit('start'); // signal
 
-
+console.log('toto');
+console.log('cocolat');
 
 

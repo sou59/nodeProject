@@ -38,3 +38,4 @@ img.do();
 
 // dans la console : node Image + tab
 
+console.log('Tartine');
