@@ -1,0 +1,21 @@
+{
+  "name": "astonexpress",
+  "version": "1.0.0",
+  "description": "API RESTful",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Souad Zerhouni",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
+    "nodemon": "^1.18.8",
+    "path": "^0.12.7",
+    "pug": "^2.0.3"
+  }
+}

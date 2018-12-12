@@ -1,0 +1,19 @@
+{
+    "app": {
+        "name": "Aston API DEV",
+        "version": "1.0.0"
+    },
+    "db": {
+        "default": {
+            "host": "localhost",
+            "user": "root",
+            "pass": "",
+            "charset": "UTF8",
+            "port": "3306"
+        }
+    },
+    "server": {
+        "addr": "localhost",
+        "port": 3000
+    }
+}
