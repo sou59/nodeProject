@@ -19,4 +19,9 @@ exports.findAll = data => {
     return Job.findAll();
 };
 
+exports.finById = id => {
+    return Job.finById();
+}
+
+// id=${req.params.id}
 

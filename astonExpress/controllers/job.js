@@ -26,21 +26,20 @@ exports.all = (req, res) => {
         }
     );
 }
-      /*
-exports.all = (req, res) => {
-    JobService.findAll(req.body)
+
+
+exports.finById = (req, res) => {
+    JobService.finById()
         .then(
-            (data) => {
-            res.status(201).json(data);
+            (id) => {
+            res.status(201).json(id);
         },
         (err) => {
             res.status(500).json(err);
         }
     );
 } 
-*/
 
-  
 
 exports.update = (req, res) => {
     res.json({message: 'OK'});
