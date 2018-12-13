@@ -1,0 +1,15 @@
+{
+    "app": {
+        "name": "Aston API PROD",
+        "version": "1.0.0"
+    },
+    "db": {
+        "default": {
+            "url": ""
+        }
+    },
+    "server": {
+        "addr": "localhost",
+        "port": 8000
+    }
+}

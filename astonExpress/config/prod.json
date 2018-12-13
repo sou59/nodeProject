@@ -5,11 +5,7 @@
     },
     "db": {
         "default": {
-            "host": "localhost",
-            "user": "root",
-            "pass": "",
-            "charset": "UTF8",
-            "port": 3306
+            "url": "mysql://root:@localhost/astonapi"
         }
     },
     "server": {
