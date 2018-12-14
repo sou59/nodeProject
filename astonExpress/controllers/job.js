@@ -7,44 +7,62 @@ exports.create = (req, res) => {
     JobService.create(req.body)
         .then(
             (data) => {
-            res.status(201).json(data);
-        },
-        (err) => {
-            res.status(500).json(err);
-        }
-    );
+                res.status(201).json(data);
+            },
+            (err) => {
+                res.status(500).json(err);
+            }
+        );
 }
+
 
 exports.all = (req, res) => {
     JobService.findAll()
         .then(
             (data) => {
-            res.status(201).json(data);
-        },
-        (err) => {
-            res.status(500).json(err);
-        }
-    );
+                res.status(200).json(data);
+            },
+            (err) => {
+                res.status(500).json(err);
+            }
+        );
 }
 
 
-exports.finById = (req, res) => {
-    JobService.finById()
+exports.find = (req, res) => {
+    JobService.findById(req.params.id)
         .then(
-            (id) => {
-            res.status(201).json(id);
-        },
-        (err) => {
-            res.status(500).json(err);
-        }
-    );
-} 
-
-
-exports.update = (req, res) => {
-    res.json({message: 'OK'});
+            (data) => {
+                res.status(200).json(data);
+            },
+            (err) => {
+                res.status(500).json(err);
+            }
+        );
 }
 
 exports.delete = (req, res) => {
-    res.json({message: 'OK'});
+    const id = req.params.id;
+    JobService.delete({
+        where: { id: id }
+    })
+        .then(
+            (deleteData) => {
+                res.status(204).json(deleteData);
+            },
+            (err) => {
+                res.status(500).json(err);
+            }
+        );
+}
+
+exports.update = (req, res) => {
+    JobService.update(req.body)
+        .then(data => {
+            res.status(204).json(); // () ne pas oublier les parenthèses
+        },
+            err => {
+                res.status(204).json(err);
+            }
+        );
 }

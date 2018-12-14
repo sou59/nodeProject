@@ -19,9 +19,28 @@ exports.findAll = data => {
     return Job.findAll();
 };
 
-exports.finById = id => {
-    return Job.finById();
+exports.findById = data => {
+    return Job.findById(data); // même nom que l'exports ici
 }
 
-// id=${req.params.id}
+exports.delete = id => {
+    return Job.destroy(id);
+}
+
+exports.update = data => {
+    return Job.update({
+        id: data.id,
+        title: data.title,
+        company: data.company,
+        city: data.city,
+        zipcode: data.zipcode,
+        description: data.description,
+        contractType: data.company,
+        startDate: new Date(data.startDate),
+        publishedDate: new Date(data.publishedDate)
+    }, 
+    { where: {id: data.id} }
+    );
+}
+
 
