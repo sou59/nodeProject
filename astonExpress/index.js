@@ -49,7 +49,6 @@ app.use(basicAuth({
 
 // requete sur bdd, on peut vérif
 
-
 // appel de la fonction token sans les parathèses
 // app.use(authToken.token('toto'));
 
@@ -64,6 +63,8 @@ app.use(express.static(path.join(__dirname, 'public'))); // dossier public acces
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées
 api.use(bodyParser.urlencoded({ extended:true }));
 api.use(bodyParser.json());
+
+ app.use(bodyParser.urlencoded);
 
 // configuration du moteur de template pug
 app.set('view engine', 'pug');

@@ -4,5 +4,5 @@ const controllers = require('../controllers');
 
 app.get('/', controllers.home);
 
-
 require('./job');
+require('./user');

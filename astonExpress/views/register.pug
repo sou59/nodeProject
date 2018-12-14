@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  form(method='POST' action='')
+    .form-group
+      label(for='nom') Nom
+      input.form-control#nom(type='nom', aria-describedby='emailHelp', placeholder='Enter email')
+      small#nomHelp.form-text.text-muted We'll never share your email with anyone else.
+    .form-group
+      label(for='prenom') Prénom
+      input.form-control#prenom(type='prenom', placeholder='prenom')
+    .form-group
+      label(for='email') Email address
+      input.form-control#email(type='email', aria-describedby='emailHelp', placeholder='Enter email')
+      small#emailHelp.form-text.text-muted We'll never share your email with anyone else.
+    .form-group
+      label(for='password') Password
+      input.form-control#password(type='password', placeholder='Password')
+    button.btn.btn-primary(type='submit') Submit
