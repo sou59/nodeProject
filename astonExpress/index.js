@@ -30,21 +30,23 @@ sequelize.sync({force: false}).then(() => {
     console.log('La bdd a bien été crée.');
 });
 
+/*
+/jobs/:id       === req.params.id
+/?token=abcd    === req.query.token
+/jobs           === req.body.name (POST)
+*/
 
 // fenêtre login mdp simple, à n'utiliser qu'avec du https
 // requete simple
+
 /*
 app.use(basicAuth({
-    users: { 
-        user: {admin: '1234'},
-        
-        authorizer: (user, password, authorize) => {
-            db.query("SELECT * FROM user WHERE user='"+user+ "' AND pass='" + pass)
-        } //requête bdd vérif 
-       
+    users: {'admin': '1234'},
+   authorizer: (user, pass, authorize) => {
+        db.query('Select * from user where user ="'+ user +'" AND pass = "'+ pass);
     },
-    challenge: true
-}))
+    challenge: true,
+}));
 */
 
 // requete sur bdd, on peut vérif
@@ -57,14 +59,16 @@ app.use(basicAuth({
 // 'combined' = donne information entrante et sortante
 // ('tiny')
 // middelwares app.use()
-app.use(morgan('tiny')); // mettre en conf
+app.use(morgan('combined')); // mettre en conf
 app.use(express.static(path.join(__dirname, 'public'))); // dossier public accessible avec es images
+
+
+app.use(bodyParser.urlencoded);
 
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées
 api.use(bodyParser.urlencoded({ extended:true }));
 api.use(bodyParser.json());
 
- app.use(bodyParser.urlencoded);
 
 // configuration du moteur de template pug
 app.set('view engine', 'pug');

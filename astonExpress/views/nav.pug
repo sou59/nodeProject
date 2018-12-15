@@ -5,18 +5,20 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-primary
   .collapse.navbar-collapse#navbarSupportedContent
     ul.navbar-nav.mr-auto
       li.nav-item.active
-        a.nav-link(href='#')
+        a.nav-link(href='/')
           | Home
           span.sr-only (current)
       li.nav-item
-        a.nav-link(href='#') Link
+        a.nav-link(href='/login') Link
+      li.nav-item
+        a.nav-link(href='/register') Se connecter
       li.nav-item.dropdown
         a.nav-link.dropdown-toggle#navbarDropdown(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false') Dropdown
         .dropdown-menu(aria-labelledby='navbarDropdown')
-          a.dropdown-item(href='/login') Login
-          a.dropdown-item(href='/register') Se connecter
+          a.dropdown-item(href='#') Test 1
+          a.dropdown-item(href='#') Test 2
           .dropdown-divider
-          a.dropdown-item(href='/') Home
+          a.dropdown-item(href='#') Test 3
       li.nav-item
         a.nav-link.disabled(href='#') Disabled
     form.form-inline.my-2.my-lg-0

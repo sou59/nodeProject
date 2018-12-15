@@ -8,67 +8,57 @@ exports.login = (req, res) => {
     res.render('login', { title: 'login' });
 };
 
-/*
 exports.create = (req, res) => {
-    UserService.create(req.body)
-        .then(
-            (data) => {
-                res.status(201).json(data);
-            },
-            (err) => {
-                res.status(500).json(err);
-            }
-        );
-}
+    UserService.create(req.body).then(
+        (data) => {
+            res.redirect("/");
+        },
+        (err) => {
+            res.status(500).json(err);
+        }
+    );
+};
 
-exports.all = (req, res) => {
-    UserService.findAll()
-        .then(
-            (data) => {
-                res.status(200).json(data);
-            },
-            (err) => {
-                res.status(500).json(err);
-            }
-        );
-}
-
+exports.findAll = (req, res) => {
+    UserService.findAll(req.body).then(
+        (data) => {
+            res.status(201).json(data);
+        },
+        (err) => {
+            res.status(500).json(err);
+        }
+    );
+};
 
 exports.find = (req, res) => {
-    UserService.findById(req.params.id)
-        .then(
-            (data) => {
-                res.status(200).json(data);
-            },
-            (err) => {
-                res.status(500).json(err);
-            }
-        );
-}
-
-exports.delete = (req, res) => {
-    const id = req.params.id;
-    UserService.delete({
-        where: { id: id }
-    })
-        .then(
-            (deleteData) => {
-                res.status(204).json(deleteData);
-            },
-            (err) => {
-                res.status(500).json(err);
-            }
-        );
-}
+    UserService.find({id: req.params.id}).then(
+        (data) => {
+            res.status(201).json(data);
+        },
+        (err) => {
+            res.status(500).json(err);
+        }
+    );
+};
 
 exports.update = (req, res) => {
-    UserService.update(req.body)
-        .then(data => {
-            res.status(204).json(); // () ne pas oublier les parenthèses
+    UserService.update(req.body).then(
+        (data) => {
+            res.status(201).json(data);
         },
-            err => {
-                res.status(204).json(err);
-            }
-        );
-}
-*/
+        (err) => {
+            res.status(500).json(err);
+        }
+    );
+};
+
+exports.delete = (req, res) => {
+    UserService.delete(req.params.id).then(
+        (data) => {
+            res.status(201).json(data);
+        },
+        (err) => {
+            res.status(500).json(err);
+        }
+    );
+};
