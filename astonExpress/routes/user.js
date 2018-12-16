@@ -3,19 +3,18 @@
 
 const controllers = require('../controllers/user');
 
-app.get('/login', controllers.login);
 app.get('/register', controllers.register);
+
+app.get('/login', controllers.login);
+
 app.post('/user', controllers.create);
 
+api.get('/user', controllers.findAll);
+
+api.get('/user/:id', controllers.find);
 
 api.post('/user', controllers.create);
 
 api.put('/user', controllers.update);
 
-api.get('/user/:id', controllers.find);
-
-api.get('/user', controllers.findAll);
-
 api.delete('/user/:id', controllers.delete);
-
-
