@@ -1,6 +1,6 @@
 {
   "name": "astonexpress",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "API RESTful",
   "main": "index.js",
   "scripts": {

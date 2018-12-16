@@ -1,7 +1,7 @@
 const UserService = require('../services/UserService');
 
 exports.register = (req, res) => {
-    res.render('register');
+    res.render('register', { title: "register" });
 };
 
 exports.login = (req, res) => {
@@ -31,7 +31,7 @@ exports.findAll = (req, res) => {
 };
 
 exports.find = (req, res) => {
-    UserService.find({id: req.params.id}).then(
+    UserService.find({ id: req.params.id }).then(
         (data) => {
             res.status(201).json(data);
         },

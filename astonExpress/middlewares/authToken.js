@@ -10,13 +10,13 @@ parametre route
 // pass permet de modifier le pass dans app et dans app on peut le modifier
 // closure
 exports.token = (pass) => {
-        return (req, res, next) => {
-            console.log('My midelware')
-            const token = req.query.token;
-            if(token !== pass) {
-                res.json({error: 'degage!'});
-            } else {
-                next();
-            }
-        };
+    return (req, res, next) => {
+        // console.log('My midelware')
+        const token = req.query.token;
+        if (token !== pass) {
+            res.json({ error: 'degage!' });
+        } else {
+            next();
+        }
     };
+};

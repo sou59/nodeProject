@@ -13,7 +13,7 @@ exports.create = data => {
 
 exports.find = (attribut) => {
     return User.findOne({
-        where: attribut 
+        where: attribut
     });
 }
 
@@ -28,7 +28,7 @@ exports.delete = (id) => {
 }
 
 exports.update = (data) => {
-    return User.update(data, { 
-        where: { id: data.id } 
+    return User.update(data, {
+        where: { id: data.id }
     });
 }
