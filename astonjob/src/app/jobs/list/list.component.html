@@ -1,0 +1,30 @@
+<!--affichage des données faire un ngfor faire delete et update -->
+
+  <h2>Job Details</h2>
+
+  <ul class="pt-5" *ngFor="let job of jobs; let i = index" (click)="onViewJob(i)">
+
+    <li class="hidden">Id : {{ job.id }}</li>
+    <li>Title : {{ job.title }}</li>
+    <li>Company : {{ job.company }}</li>
+    <li>City : {{ job.city }}</li>
+    <li>ZipCode : {{ job.zipcode }}</li>
+    <li>Description : {{ job.description }}</li>
+    <li>Contract type : {{ job.contractType }}</li>
+    <li>Start date : {{ job.startDate | date:'dd/MM/y H:m:s'  }}</li>
+    <li>
+        <button class="btn btn-danger" (click)="deleteJob(job)">
+            Delete Job</button>
+
+        <button class="btn btn-danger" (click)="getMyId()" style="margin-left: 20px;">
+            Edit Job</button>
+            <a [routerLink]='[job.id]'>Détail</a>
+    </li>
+    <hr>
+
+  </ul>
+
+  <button class="btn btn-danger" (click)="addJob()">
+      Add Job
+  </button>
+

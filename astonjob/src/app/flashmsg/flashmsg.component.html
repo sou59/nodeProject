@@ -1,0 +1,5 @@
+<div class="flashmsg flashmsg-{{ message.type }}" *ngFor="let message of messages; let i = index">
+  <p class="flashmsg-txt">{{ message.text }}</p>
+  <div class="flashmsg-close-btn" (click)="onClose(i)">X</div>
+</div>
+  

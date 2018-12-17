@@ -66,8 +66,6 @@ app.use(express.static(path.join(__dirname, 'public'))); // dossier public acces
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());
 
-app.use(bodyParser.urlencoded);
-
 // configuration du moteur de template pug
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));

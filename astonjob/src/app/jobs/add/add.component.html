@@ -1,0 +1,56 @@
+
+<mat-card>
+  <mat-card-title>Jobs</mat-card-title>
+  <mat-card-subtitle>Ajout d'un nouveau job</mat-card-subtitle>
+
+  <mat-card-content>
+    <form class="form-fields" [formGroup]="form" (ngSubmit)="addJob()">
+      
+        <mat-form-field class="example-full-width">
+          <mat-label>Titre</mat-label>
+          <input matInput type="text" maxLength="255" required formControlName="title" placeholder="Titre">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Company</mat-label>
+          <input matInput type="text" maxLength="20" required formControlName="company" placeholder="Aston">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Ville</mat-label>
+          <input matInput type="text" maxLength="40" required formControlName="city" placeholder="Lille">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Code postal</mat-label>
+          <input matInput type="text" maxLength="10" required formControlName="zipcode" placeholder="59160">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput maxLength="255" required formControlName="description" placeholder="Toto"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Date : </mat-label>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Favorite food" formControlName="contractType">
+            <mat-option *ngFor="let contractType of contractTypes" [value]="contractType.id">
+              {{contractType.label}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        
+
+        <button type="submit" [disabled]="!form.valid" mat-raised-button color="primary">Sauvegarder</button>
+             
+    </form>
+  </mat-card-content>
+
+</mat-card>
