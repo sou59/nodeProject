@@ -4,8 +4,11 @@ const bodyParser = require('body-parser');
 const pug = require('pug');
 const path = require('path');
 const config = require('./config');
+const cors = require('./middlewares/cors')
+const dbPassword = '$2b$10$20VHqNYTiKy4u7Ivi26k3O7zoEkhXQA33TOB4indGW5vJMs8sCaGq';
+
 const authToken = require('./middlewares/authToken');
-const basicAuth = require('express-basic-auth')
+const basicAuth = require('express-basic-auth');
 
 // en premier création de l'application
 app = express(); // pages publiques
@@ -22,8 +25,10 @@ conf = config.load();
 // import de la bibliothèque
 Sequelize = require('sequelize');
 sequelize = new Sequelize(conf.db.default.url, {
-    logging: true // valeur en dev
+    logging: false, // valeur en dev
+    operatorsAliases: false
 });
+
 
 // forcer la création des tables si elle n'existe pas : {force: true} pour la création de la base
 sequelize.sync({ force: false }).then(() => {
@@ -61,6 +66,10 @@ app.use(basicAuth({
 // middelwares app.use()
 app.use(morgan('combined')); // mettre en conf
 app.use(express.static(path.join(__dirname, 'public'))); // dossier public accessible avec es images
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+api.use(cors);
 
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées
 api.use(bodyParser.urlencoded({ extended: true }));

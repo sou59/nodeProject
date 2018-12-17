@@ -1,9 +1,9 @@
 // services/JobService.js
 
-const Job = require('../models/JobModel');
+const JobModel = require('../models/JobModel');
 
 exports.create = data => {
-    return Job.create({
+    return JobModel.create({
         title: data.title,
         company: data.company,
         city: data.city,
@@ -16,19 +16,19 @@ exports.create = data => {
 };
 
 exports.findAll = data => {
-    return Job.findAll();
+    return JobModel.findAll();
 };
 
 exports.findById = data => {
-    return Job.findById(data); // même nom que l'exports ici
+    return JobModel.findById(data); // même nom que l'exports ici
 }
 
 exports.delete = id => {
-    return Job.destroy(id);
+    return JobModel.destroy(id);
 }
 
 exports.update = data => {
-    return Job.update({
+    return JobModel.update({
         id: data.id,
         title: data.title,
         company: data.company,

@@ -4,7 +4,7 @@ import { Job } from '../models/Job';
 import { Observable, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-const API_BASE_URL = 'http://localhost:3000/jobs';
+const API_BASE_URL = 'http://localhost:3000/api/jobs';
 
 @Injectable({
   providedIn: 'root'

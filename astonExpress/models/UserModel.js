@@ -1,26 +1,26 @@
 // models/JobModel.js
 
 module.exports = sequelize.define('user', {
-    nom: {
+    name: {
         type: Sequelize.STRING,
-        field: 'nom',
+        field: 'name',
         allowNulse: false, 
     },
-    prenom: {
+    email: {
         type: Sequelize.STRING,
-        field: 'prenom',
-        allowNulse: false, 
-    },
-    mdp: {
-        type: Sequelize.STRING,
-        field: 'mdp',
-        allowNulse: false, 
-    },
-    mail: {
-        type: Sequelize.STRING,
-        field: 'mail',
+        field: 'email',
         allowNulse: false, 
         unique: true
+    },
+    password: {
+        type: Sequelize.STRING,
+        field: 'password',
+        allowNulse: false, 
+    },
+    active: {
+        type: Sequelize.BOOLEAN,
+        field: 'active',
+        allowNulse: false, 
     }
 });
  

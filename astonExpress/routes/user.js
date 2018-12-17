@@ -3,6 +3,20 @@
 
 const controllers = require('../controllers/user');
 
+//http://localhost:3000/user
+app.get('/register', controllers.register);
+
+app.post('/registerapi', controllers.registerapi);
+
+// vincent authentication = login
+//http://localhost:3000/login
+//app.get('/login', controllers.login);
+
+app.post('/authentication', controllers.authentication);
+
+/*
+app.post('/user', controllers.create);
+
 api.post('/user', controllers.create);
 
 api.get('/user', controllers.findAll);
@@ -13,8 +27,4 @@ api.put('/user', controllers.update);
 
 api.delete('/user/:id', controllers.delete);
 
-app.get('/register', controllers.register);
-
-app.get('/login', controllers.login);
-
-app.post('/user', controllers.create);
+*/
