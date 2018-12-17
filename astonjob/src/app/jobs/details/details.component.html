@@ -3,10 +3,30 @@
     <mat-card-subtitle>{{ job.company | titlecase }}</mat-card-subtitle>
 
     <mat-card-content>
-        <p>{{ job.description }}</p>
+        <p>Description :
+            {{ job.description | titlecase }}</p>
+        <p>Company :
+            {{ job.company | titlecase }}</p>
+        <p>City :
+            {{ job.city | titlecase }}</p>
+        <p>ZipCode :
+            {{ job.zipcode }}</p>
+        <p>Description :
+            {{ job.description }}</p>
+        <p>Contract type :
+            {{ job.contractType }}</p>
+        <p>Start date :
+            {{ job.startDate | date:'dd/MM/y H:m:s'  }}</p>
     </mat-card-content>
 
     <mat-card-actions>
         <button mat-button routerLink="/jobs/delete/{{ job.id }}" color="warn">Supprimer</button>
     </mat-card-actions>
+
+    <button routerLink="/jobs/delete/{{ job.id }}" color="warn">Supprimer</button>
+    <button class="btn btn-success bouton1" color="primary" >
+      <a mat-list-item href="#" routerLink="/jobs/add/{{ job.id }}">Editer</a>
+    </button>
+
+    <a [routerLink]='[job.id]'>Détail</a>
 </mat-card>

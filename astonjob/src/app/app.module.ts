@@ -37,6 +37,7 @@ const routes: Route[] = [
   { path: '', component: HomeComponent },
   { path: 'jobs', component: ListComponent },
   { path: 'jobs/add', component: AddComponent },
+  { path : 'jobs/add/:id', component: AddComponent},
   { path: 'jobs/delete/:id', component: DeleteComponent },
   { path: 'jobs/:id', component: DetailsComponent },
   { path: 'not-found', component: FourOhFourComponent },
@@ -54,7 +55,6 @@ const routes: Route[] = [
     FourOhFourComponent,
     FlashmsgComponent,
     DeleteComponent,
-
   ],
   imports: [
     RouterModule.forRoot(routes),

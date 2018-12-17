@@ -24,7 +24,7 @@ export class JobsService {
   @Input() startDate: Date;
   @Input() index: number;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // ajouter ne pas oublier le return, en paramètre l'adresse de l'api et le job
   add(job: Job) {
@@ -32,8 +32,9 @@ export class JobsService {
   }
 
   // trouver un seul job par id
-  find(id: Number) {
-    return this.http.get(`${API_BASE_URL}/${id}`)
+  find(id: Number): Observable<Job> {
+    const url = API_BASE_URL + '/' + id;
+    return this.http.get<Job>(url)
       .pipe(map(res => res));
   }
 
@@ -41,9 +42,9 @@ export class JobsService {
   all(): Observable<Job[]> { // type de retour tableau de Job
     return this.http.get<Job[]>(API_BASE_URL)
       .pipe(map(res => res)); // filtrage des données
-      // fonction flechée map(res => { return res; });
-      // retourne les données sous tab
-      // renvoie un objet observable
+    // fonction flechée map(res => { return res; });
+    // retourne les données sous tab
+    // renvoie un objet observable
   }
 
   // supprimer un job
@@ -57,9 +58,15 @@ export class JobsService {
   }
 
   // updater un job
-  update(job: Job) {
+  /*update(job: Job) {
     return this.http.put(API_BASE_URL + '/' + job.id, job)
-    .pipe(map(res => res));
+      .pipe(
+        map(res => res));
+  }*/
+
+  updateJob(job: Job, id: Number) {
+    const url = API_BASE_URL + '/' + id;
+    return this.http.put(url, job);
   }
 
 }
