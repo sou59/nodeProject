@@ -32,8 +32,15 @@ import { JobsService } from './services/jobs.service';
 import { FlashmsgComponent } from './flashmsg/flashmsg.component';
 import { DeleteComponent } from './jobs/delete/delete.component';
 import { FlashmsgService } from './services/flashmsg.service';
+import { SignupComponent } from './auth/signup/signup.component';
+import { SigninComponent } from './auth/signin/signin.component';
+import { HeaderComponent } from './header/header.component';
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Route[] = [
+  { path: 'auth/signup', component: SignupComponent },
+  { path: 'auth/signin', component: SigninComponent },
   { path: '', component: HomeComponent },
   { path: 'jobs', component: ListComponent },
   { path: 'jobs/add', component: AddComponent },
@@ -55,6 +62,9 @@ const routes: Route[] = [
     FourOhFourComponent,
     FlashmsgComponent,
     DeleteComponent,
+    SignupComponent,
+    SigninComponent,
+    HeaderComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
@@ -76,11 +86,16 @@ const routes: Route[] = [
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     JobsService,
-    FlashmsgService
+    FlashmsgService,
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
