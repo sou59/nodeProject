@@ -5,7 +5,7 @@ parametre route
 /jobs === rea.body.name pour (post)
 
 */
-// le middleware 3 paramètres : raq, res, next : la suite
+// le middleware 3 paramètres : req, res, next : la suite
 
 // pass permet de modifier le pass dans app et dans app on peut le modifier
 // closure

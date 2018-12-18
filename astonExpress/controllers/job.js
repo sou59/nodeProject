@@ -17,6 +17,8 @@ exports.create = (req, res) => {
 
 
 exports.all = (req, res) => {
+    console.log(req.payload);
+    
     JobService.findAll()
         .then(
             (data) => {

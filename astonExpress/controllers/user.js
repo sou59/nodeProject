@@ -1,4 +1,5 @@
 const UserService = require('../services/UserService');
+const jwt = require('../modules/jwt');
 
 
 exports.register = (req, res) => {
@@ -23,14 +24,25 @@ exports.authentication = (req, res) => {
     UserService.authenticate(req.body).then(
         user => {
             // console.log(user); -> message très long
-            res.json(user);
+            jwt.generateToken(user, (err, token) => {
+                // console.log(token);
+                res.cookie('token', token, {
+                    maxAge: 1000 * 60 * 15,
+                    httpOnly: true
+                });
+                res.json(user);
+            });
         },
         err => {
           //  console.log(err.toString());
-            res.status(401).json({message: err.message }); // erreur dans le json si pas de user
+            res.status(401).json({ message: err.message }); // erreur dans le json si pas de user
         }
     )
 };
+
+// génération du token ici
+
+
 
 // authenticate = login
 /*

@@ -13,9 +13,8 @@
     <li>Contract type : {{ job.contractType }}</li>
     <li>Start date : {{ job.startDate | date:'dd/MM/y H:m:s'  }}</li>
     <li>
-
         <button class="btn btn-success bouton1" color="primary" >
-          <a mat-list-item href="#" routerLink="/jobs/add/job.id">Editer</a>
+          <a mat-list-item href="#" routerLink="/jobs/add/{{ job.id }}">Editer</a>
         </button>
 
         <a [routerLink]='[job.id]'>Détail</a>
@@ -23,35 +22,22 @@
         <button routerLink="/jobs/delete/{{ job.id }}" color="warn">Supprimer</button>
     </li>
 
-
-
     <hr>
-
   </ul>
 
   <!--
   <div *ngFor="let job of jobs">
-
       <mat-card class="listeCard">
-
         <mat-card-title><a mat-list-item href="#" routerLink="jobs/add/job.id"></a></mat-card-title>
-
         <mat-label>Entreprise</mat-label>
         <mat-label></mat-label>
-
         <div class="buttonContainer">
           <button class="btn btn-success bouton1" color="primary" ><a mat-list-item href="#" routerLink="/jobs/add/{{job.id}}">Editer</a></button>
           <button class="btn btn-success bouton1" color="primary" (click)="supprJob(job.id)">Supprimer</button>
-
           <a [routerLink]='[job.id]'>Détail</a>
-
           <button class="btn btn-danger" (click)="deleteJob(job)">
               Delete Job</button>
-
-
         </div>
-
       </mat-card>
-
     </div>
 -->

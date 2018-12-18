@@ -4,9 +4,10 @@ const bodyParser = require('body-parser');
 const pug = require('pug');
 const path = require('path');
 const config = require('./config');
-const cors = require('./middlewares/cors')
+const cors = require('./middlewares/cors');
+const cookieParser = require('cookie-parser');
+const jwtCheck = require('./middlewares/jwt-check');
 const dbPassword = '$2b$10$20VHqNYTiKy4u7Ivi26k3O7zoEkhXQA33TOB4indGW5vJMs8sCaGq';
-
 const authToken = require('./middlewares/authToken');
 const basicAuth = require('express-basic-auth');
 
@@ -68,9 +69,11 @@ app.use(morgan('combined')); // mettre en conf
 app.use(express.static(path.join(__dirname, 'public'))); // dossier public accessible avec es images
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 api.use(cors);
-
+api.use(cookieParser());
+api.use(jwtCheck);
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());

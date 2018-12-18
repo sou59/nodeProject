@@ -57,7 +57,7 @@ export class AddComponent implements OnInit {
         data => {
           this.job = data;
 
-          this.sousTitre = "Editer l'offre" + this.job.title;
+          this.sousTitre = "Editer l'offre : " + this.job.title;
 
           const select = this.job.contractType;
 
