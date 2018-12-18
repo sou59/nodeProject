@@ -15,10 +15,9 @@ exports.create = (req, res) => {
         );
 }
 
-
 exports.all = (req, res) => {
-    console.log(req.payload);
-    
+    console.log(req.payload); // on peut récupérer les infoc partout
+
     JobService.findAll()
         .then(
             (data) => {

@@ -1,0 +1,22 @@
+{
+  "name": "gulptasks",
+  "version": "0.1.0",
+  "description": "Automatisation des taches",
+  "main": "gulpfile.js",
+  "scripts": {
+    "hello": "gulp hello",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Souad",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-sass": "^4.0.2",
+    "lite-server": "^2.4.0"
+  },
+  "dependencies": {
+    "gulp-cli": "^2.0.1"
+  }
+}
