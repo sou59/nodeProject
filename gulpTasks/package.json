@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "hello": "gulp hello",
+    "dev": "concurrently \"gulp dev\" \"lite-server\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Souad",

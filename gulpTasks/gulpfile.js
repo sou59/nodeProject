@@ -19,4 +19,11 @@ gulp.task('styles', done => {
     done();
 });
 
+gulp.task('sass-watcher', done => {
+    gulp.watch('./sass/**/*.scss', gulp.series('styles'));
+    done();
+});
+
+gulp.task('dev', gulp.parallel('sass-watcher'));
+
 
