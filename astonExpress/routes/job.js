@@ -5,7 +5,7 @@ const controllers = require('../controllers/job');
 
 // localhost:3000/api/jobs
 api.post('/jobs', controllers.create);
-
+api.post('/jobs/add', controllers.create);
 // localhost:3000/api/jobs
 api.get('/jobs', controllers.all);
 

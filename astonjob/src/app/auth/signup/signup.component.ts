@@ -40,23 +40,7 @@ export class SignupComponent implements OnInit {
         password: ['', [Validators.required]] // Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
       });
     }
-
-    onSubmit() {
-      const nom = this.signupForm.get('name').value;
-      const prenom = this.signupForm.get('prenom').value;
-      const email = this.signupForm.get('email').value;
-      const password = this.signupForm.get('password').value;
-
-      this.userService.addUser(name).subscribe(
-        () => {
-          this.router.navigate(['/user']);
-        },
-        (error) => {
-          this.errorMessage = error;
-        }
-      );
-    }
-    */
+  */
 
   addUser() {
     this.userService
@@ -73,25 +57,6 @@ export class SignupComponent implements OnInit {
       );
   }
 
-  /*
-    onSubmit() {
-      const nom = this.signupForm.get('nom').value;
-      const prenom = this.signupForm.get('prenom').value;
-      const email = this.signupForm.get('email').value;
-      const password = this.signupForm.get('password').value;
-
-      this.authService.register(nom, prenom, password, email).subscribe(
-        (user: User) => {
-          this.flashmsgService.add('User ajouté', 'success');
-          this.signupForm.reset();
-          this.router.navigate(['/authentication']);
-        },
-        (err) => {
-          console.log('Une erreur est survenue' + err);
-        }
-      );
-    }
-    */
 
   /*
   getUsers() {

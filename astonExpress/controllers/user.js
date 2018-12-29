@@ -84,7 +84,7 @@ exports.findAll = (req, res) => {
         }
     );
 };
-
+*/
 exports.find = (req, res) => {
     UserService.find({ id: req.params.id }).then(
         (data) => {
@@ -95,7 +95,7 @@ exports.find = (req, res) => {
         }
     );
 };
-
+/*
 exports.update = (req, res) => {
     UserService.update(req.body).then(
         (data) => {

@@ -21,17 +21,17 @@ export class AddComponent implements OnInit {
 
   // tableau de contrat type
   contractTypes: ContractType[] = contractTypes;
+  alertMessage: String;
 
 // génération d'un groupe de champs
   form: FormGroup;
   job: Job = {} as Job;
-
   sousTitre = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private jobsService: JobsService,
-    private alerte: FlashmsgService,
+    private flashmsgService: FlashmsgService,
     private activeRoutes: ActivatedRoute,
     private router: Router,
     ) { }
@@ -57,7 +57,7 @@ export class AddComponent implements OnInit {
         data => {
           this.job = data;
 
-          this.sousTitre = "Editer l'offre : " + this.job.title;
+          this.sousTitre = 'Editer l\'offre : ' + this.job.title;
 
           const select = this.job.contractType;
 
@@ -94,22 +94,22 @@ export class AddComponent implements OnInit {
       );
     }
   }
-  /*
-    addJob() {
-      this.jobsService// appel du service (services/jobs.service.ts)
-          .add(this.form.value)// récupère les éléments du formulaire
-           .subscribe(  // si tout se passe bien, en cas de réussite on peux utiliser les flash message pour dire sucess
-            (job: Job) => { // type Job créer dans Job.ts
-              this.flashmsgService.add('Job ajouté', 'success');
-              this.form.reset(); // vide le formulaire
-              this.router.navigate(['/jobs']);
-            },
-            (err) => {
-              console.log("Une erreur est survenue");
-            }
-          );
-      }
-  */
+
+  addJob() {
+    this.jobsService// appel du service (services/jobs.service.ts)
+        .add(this.form.value)// récupère les éléments du formulaire
+          .subscribe(  // si tout se passe bien, en cas de réussite on peux utiliser les flash message pour dire sucess
+          (job: Job) => { // type Job créer dans Job.ts
+            this.flashmsgService.add('Job ajouté', 'success');
+            this.form.reset(); // vide le formulaire
+            this.router.navigate(['/jobs']);
+          },
+          (err) => {
+            console.log('Une erreur est survenue');
+          }
+        );
+    }
+/*
   addJob() {
     this.jobsService
       .add(this.form.value)
@@ -124,5 +124,5 @@ export class AddComponent implements OnInit {
         }
       );
   }
-
+*/
 }

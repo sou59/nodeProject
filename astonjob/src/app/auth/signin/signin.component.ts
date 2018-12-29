@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { FlashmsgService } from 'src/app/services/flashmsg.service';
 import { User } from 'src/app/models/User';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-signin',
@@ -21,7 +22,8 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private userService: UsersService,
     private flashmsgService: FlashmsgService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private cookieService: CookieService) { }
 
   ngOnInit() {
     this.initForm();
@@ -30,7 +32,7 @@ export class SigninComponent implements OnInit {
   initForm() {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', Validators.required]
     });
   }
 
@@ -38,7 +40,6 @@ export class SigninComponent implements OnInit {
     onSubmit() {
       const email = this.signInForm.get('email').value;
       const password = this.signInForm.get('password').value;
-
       this.authService.login(email, password).subscribe(
         () => {
           this.router.navigate(['/authentication']);
@@ -53,7 +54,7 @@ export class SigninComponent implements OnInit {
     const email = this.signInForm.get('email').value;
     const password = this.signInForm.get('password').value;
     // On récupère l'url de redirection
-    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/home';
+   // const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/home';
 
     this.authService
       .login(email, password)
@@ -63,7 +64,7 @@ export class SigninComponent implements OnInit {
           this.signInForm.reset();
           // On accède à la page souhaitée
          // this.router.navigate([redirectUrl]);
-          this.router.navigate(['/jobs']);
+         this.router.navigate(['/jobs']);
         },
         (err) => {
           console.log('Une erreur est survenue');

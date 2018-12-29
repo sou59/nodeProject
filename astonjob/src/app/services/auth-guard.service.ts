@@ -8,21 +8,21 @@ import { Observable } from 'rxjs';
 export class AuthGuardService implements CanActivate {
 
   constructor(private usersService: UsersService, private router: Router,
-    private authService: AuthService) {}
+    private authService: AuthService) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> |
-   boolean {
+    boolean {
+
     if (this.authService.isLoggedIn()) {
+     // this.router.navigate(['/jobs']);
       return true;
-    } else {
-      console.log('Vous êtes non connectés');
-      this.router.navigate(['/auth/signin'], { queryParams: { redirectUrl: state.url }}
-     // this.router.navigate(['/signin']
-      );
-      return false;
     }
+      console.log('Vous êtes non connectés');
+      this.router.navigate(['/auth/signin']);
+        // this.router.navigate(['/signin'], { queryParams: { redirectUrl: state.url } }
+      return false;
   }
-  // return this.authService.isLoggedIn();
+
 }

@@ -12,7 +12,8 @@ export class AuthService {
   TOKEN_KEY = 'token';
 
   constructor(private http: HttpClient, private router: Router,
-    private cookieService: CookieService) { }
+    private cookieService: CookieService,
+    private route: Router) { }
 
   checkToken() {
     return this.cookieService.check('token');
@@ -39,10 +40,11 @@ export class AuthService {
 
   logout() {
     this.cookieService.delete('token');
+    this.route.navigate(['/auth/signin']);
   }
 
   isLoggedIn() {
-    return this.cookieService.check('token');
+    return this.cookieService.check('token') !== null;
   }
 
   register(nom, prenom, password, email) {

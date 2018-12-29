@@ -14,7 +14,7 @@ app.post('/registerapi', controllers.registerapi);
 //app.get('/login', controllers.login);
 
 app.post('/authentication', controllers.authentication);
-
+api.get('/user/:id', controllers.find);
 /*
 app.post('/user', controllers.create);
 

@@ -6,20 +6,46 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
 
-    constructor(private injector: Injector,
-                public auth: AuthService) { }
+  constructor(private injector: Injector,
+    public auth: AuthService) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-      if (this.auth.isLoggedIn()) {
-        request = request.clone({
-          setHeaders: {
-            Authorization: `Bearer ${this.auth.getToken()}`
-          }
-        });
-      }
-
-      return next.handle(request);
+    if (this.auth.isLoggedIn()) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${this.auth.getToken()}`
+        }
+      });
     }
+
+    return next.handle(request);
+  }
+
+  /*
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // add authorization header with jwt token if available
+    let currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (currentUser && currentUser.token) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${currentUser.token}`
+        }
+      });
+    }
+
+    return next.handle(request).do((event: HttpEvent<any>) => {
+      if (event instanceof HttpResponse) {
+        // do stuff with response if you want
+      }
+    }, (err: any) => {
+      if (err instanceof HttpErrorResponse) {
+        if (err.status === 401) {
+          // redirect to the login route
+          // or show a modal showing, we are redirecting to you login page.
+        }
+      }
+    });
+  }*/
 
 }
