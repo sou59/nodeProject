@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UsersService } from '../../services/users.service';
+import { FlashmsgService } from 'src/app/services/flashmsg.service';
+import { User } from 'src/app/models/User';
 
 @Component({
   selector: 'app-signin',
@@ -14,8 +17,11 @@ export class SigninComponent implements OnInit {
   errorMessage: string;
 
   constructor(private formBuilder: FormBuilder,
-              private authService: AuthService,
-              private router: Router) { }
+    private authService: AuthService,
+    private router: Router,
+    private userService: UsersService,
+    private flashmsgService: FlashmsgService,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.initForm();
@@ -24,24 +30,45 @@ export class SigninComponent implements OnInit {
   initForm() {
     this.signInForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+      password: ['', [Validators.required]]
     });
   }
 
+  /*
+    onSubmit() {
+      const email = this.signInForm.get('email').value;
+      const password = this.signInForm.get('password').value;
 
-  onSubmit() {
+      this.authService.login(email, password).subscribe(
+        () => {
+          this.router.navigate(['/authentication']);
+        },
+        (error) => {
+          this.errorMessage = error;
+        }
+      );
+    }
+  */
+  login() {
     const email = this.signInForm.get('email').value;
     const password = this.signInForm.get('password').value;
+    // On récupère l'url de redirection
+    const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/home';
 
-    this.authService.login(email, password).subscribe(
-      () => {
-        this.router.navigate(['/jobs']);
-      },
-      (error) => {
-        this.errorMessage = error;
-      }
-    );
+    this.authService
+      .login(email, password)
+      .subscribe(
+        (user: User) => {
+          this.flashmsgService.add('User valide', 'success');
+          this.signInForm.reset();
+          // On accède à la page souhaitée
+         // this.router.navigate([redirectUrl]);
+          this.router.navigate(['/jobs']);
+        },
+        (err) => {
+          console.log('Une erreur est survenue');
+        }
+      );
   }
-
 
 }

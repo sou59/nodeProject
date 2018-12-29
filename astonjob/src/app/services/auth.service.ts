@@ -8,54 +8,54 @@ import { map } from 'rxjs/operators';
 
 export class AuthService {
 
-    API_URL = 'http://localhost:3000';
-    TOKEN_KEY = 'token';
+  API_URL = 'http://localhost:3000';
+  TOKEN_KEY = 'token';
 
-    constructor(private http: HttpClient, private router: Router,
-                private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private router: Router,
+    private cookieService: CookieService) { }
 
-    checkToken() {
-      return this.cookieService.check('token');
-    }
+  checkToken() {
+    return this.cookieService.check('token');
+  }
 
-    getToken() {
-      return this.cookieService.get('token');
-    }
+  getToken() {
+    return this.cookieService.get('token');
+  }
 
-    login(name: string, password: string) {
-      return this.http.post<any>(`${this.API_URL}/auth/signin`,
-          new HttpParams({fromObject: {name, password}}),
-          {
-            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-          }
-        ).pipe(map(user => {
-          if (user && user.token) {
-            this.cookieService.set('token', user.token);
-          }
-          return user;
-        }));
-    }
+  login(email: string, password: string) {
+    return this.http.post<any>(`${this.API_URL}/authentication`,
+      new HttpParams({ fromObject: { email, password } }),
+      {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      }
+    ).pipe(map(user => {
+      if (user && user.token) {
+        this.cookieService.set('token', user.token);
 
-    logout() {
-      this.cookieService.delete('token');
-    }
+      }
+      return user;
+    }));
+  }
 
-    isLoggedIn() {
-      return this.cookieService.check('token');
-    }
+  logout() {
+    this.cookieService.delete('token');
+  }
 
-    register(name, password, email) {
-      return this.http.post<any>(`${this.API_URL}/user`,
-        new HttpParams({fromObject: {name, password, email}}),
-        {
-          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-        }
-      )
-        .pipe(map(user => {
-          console.log(user);
-          return user;
-        }));
-    }
+  isLoggedIn() {
+    return this.cookieService.check('token');
+  }
 
+  register(nom, prenom, password, email) {
+    return this.http.post<any>(`${this.API_URL}/register`,
+      new HttpParams({ fromObject: { nom, prenom, password, email } }),
+      {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      }
+    )
+      .pipe(map(user => {
+        console.log(user);
+        return user;
+      }));
+  }
 
 }

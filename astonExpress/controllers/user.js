@@ -7,6 +7,10 @@ exports.register = (req, res) => {
     res.render('register', { title: "register" });
 };
 
+exports.authentication = (req, res) => {
+    res.render('authentication', { title: "authentication" });
+};
+
 // sequilize index.js à true
 exports.registerapi = (req, res) => {
     UserService.registerapi(req.body)

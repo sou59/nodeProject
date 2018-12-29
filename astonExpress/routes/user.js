@@ -5,6 +5,7 @@ const controllers = require('../controllers/user');
 
 //http://localhost:3000/user
 app.get('/register', controllers.register);
+app.get('/authentication', controllers.authentication);
 
 app.post('/registerapi', controllers.registerapi);
 
