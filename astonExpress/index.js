@@ -10,18 +10,24 @@ const jwtCheck = require('./middlewares/jwt-check');
 const dbPassword = '$2b$10$20VHqNYTiKy4u7Ivi26k3O7zoEkhXQA33TOB4indGW5vJMs8sCaGq';
 const authToken = require('./middlewares/authToken');
 const basicAuth = require('express-basic-auth');
+var cookies = require("cookie-parser");
 
 // en premier création de l'application
 app = express(); // pages publiques
+
 api = express.Router(); // api sécuriser
+
 
 // utilise le router pour toutes les pages qui commencent par api
 // ET SURTOUT NE PAS OUBLIER LE /
 app.use('/api', api);
+//api.use(cors);
+//app.use(cookies());
 
 //config.load();
 conf = config.load();
 
+app.use(cookies());
 // base de données le plus haut possible, si elle crache rien d'autre ne passe
 // import de la bibliothèque
 Sequelize = require('sequelize');
@@ -69,9 +75,9 @@ app.use(morgan('combined')); // mettre en conf
 app.use(express.static(path.join(__dirname, 'public'))); // dossier public accessible avec es images
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+api.use(cors);
 app.use(cookieParser());
 
-api.use(cors);
 api.use(cookieParser());
 api.use(jwtCheck);
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées

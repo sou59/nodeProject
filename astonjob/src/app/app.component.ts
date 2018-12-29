@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { Job } from './models/Job';
-import * as firebase from 'firebase';
+import { SignupComponent } from './auth/signup/signup.component';
+import { HomeComponent } from './home/home.component';
+import { AddComponent } from './jobs/add/add.component';
+import { ListComponent } from './jobs/list/list.component';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +11,7 @@ import * as firebase from 'firebase';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  //title = 'astonjob';
+  // title = 'astonjob';
 
 
   @Input() jobs: Job[] = [];
@@ -23,16 +26,24 @@ export class AppComponent {
   @Input() index: number;
 
   constructor() {
-
+/*
+const routes = [
+    { path: 'login', component: SignupComponent },
+    {
+        path: 'jobs',
+        component: ListComponent,
+        canActivate: [
+            CanActivateViaAuthGuard
+        ]
+    },
+    { path: '', component: HomeComponent },
+    { path: '**', redirectTo: '' }
+];
+*/
     const config = {
-      apiKey: 'AIzaSyCwfa_fKNCVrDMR1E88S79mpQP-6qertew4',
-      authDomain: 'bookshelves-3d570.firebaseapp.com',
-      databaseURL: 'https://bookshelves-3d570.firebaseio.com',
-      projectId: 'bookshelves-3d570',
-      storageBucket: 'bookshelves-3d570.appspot.com',
-      messagingSenderId: '6634573823'
+      authDomain: 'http://localhost:3000',
+      databaseURL: 'http://localhost:3000/jobs',
     };
-    firebase.initializeApp(config);
   }
 
 }

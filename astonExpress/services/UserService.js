@@ -1,4 +1,4 @@
-// services/JobService.js
+// services/UserService.js
 
 const UserModel = require('../models/UserModel');
 const bcryptPassword = require('../modules/bcrypt-password');

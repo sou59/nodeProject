@@ -1,5 +1,6 @@
 const UserService = require('../services/UserService');
 const jwt = require('../modules/jwt');
+const http = require("http");
 
 
 exports.register = (req, res) => {
@@ -40,9 +41,16 @@ exports.authentication = (req, res) => {
     )
 };
 
-// génération du token ici
 
+/*
+// génération du cookie
+    var Cookies = require( "cookies" );
 
+    new Cookies(request, response).set('access_token',token, {
+        httpOnly: true, //cookie not available through client js code
+        secure: false // true to force https
+    });
+*/
 
 // authenticate = login
 /*

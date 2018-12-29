@@ -24,7 +24,7 @@ import { AddComponent } from './jobs/add/add.component';
 import { ListComponent } from './jobs/list/list.component';
 import { DetailsComponent } from './jobs/details/details.component';
 import { HomeComponent } from './home/home.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FourOhFourComponent } from './four-oh-four/four-oh-four.component';
@@ -36,17 +36,19 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthService } from './services/auth.service';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Route[] = [
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
   { path: '', component: HomeComponent },
-  { path: 'jobs', component: ListComponent },
-  { path: 'jobs/add', component: AddComponent },
-  { path : 'jobs/add/:id', component: AddComponent},
-  { path: 'jobs/delete/:id', component: DeleteComponent },
-  { path: 'jobs/:id', component: DetailsComponent },
+  { path: 'jobs', canActivate: [AuthGuardService], component: ListComponent },
+  { path: 'jobs/add', canActivate: [AuthGuardService], component: AddComponent },
+  { path : 'jobs/add/:id', canActivate: [AuthGuardService], component: AddComponent},
+  { path: 'jobs/delete/:id', canActivate: [AuthGuardService], component: DeleteComponent },
+  { path: 'jobs/:id', canActivate: [AuthGuardService], component: DetailsComponent },
   { path: 'not-found', component: FourOhFourComponent },
   { path: '**', redirectTo: 'not-found' },
 ];
@@ -95,7 +97,14 @@ const routes: Route[] = [
     JobsService,
     FlashmsgService,
     AuthService,
-    AuthGuardService
+    AuthGuardService,
+    CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+
   ],
   bootstrap: [AppComponent]
 })

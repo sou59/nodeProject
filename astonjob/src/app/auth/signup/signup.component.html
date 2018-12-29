@@ -1,3 +1,21 @@
-<p>
-  signup works!
-</p>
+<div class="container">
+<form method="POST" action="" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="nom">Nom</label>
+    <input class="form-control" id="nom" type="nom" placeholder="Enter name" formControlName="name">
+  </div>
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input class="form-control" id="email" type="email" aria-describedby="emailHelp" placeholder="Enter email" formControlName="email"><small class="form-text text-muted" id="emailHelp">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input class="form-control" id="password" type="password" placeholder="Password" formControlName="password">
+  </div>
+  <button class="btn btn-primary"
+              type="submit">
+              Créer mon compte</button>
+</form>
+<p class="text-danger">{{ errorMessage }}</p>
+</div>
+
