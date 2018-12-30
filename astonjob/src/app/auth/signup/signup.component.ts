@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.signupForm = this.formBuilder.group({ // data du formulaire
-      nom: '',
+      name: '',
       prenom: '',
       email: '',
       password: '',

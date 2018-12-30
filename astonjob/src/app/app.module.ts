@@ -46,7 +46,7 @@ const routes: Route[] = [
   { path: '', component: HomeComponent },
   { path: 'jobs', canActivate: [AuthGuardService], component: ListComponent },
   { path: 'jobs/add', canActivate: [AuthGuardService], component: AddComponent },
-  { path : 'jobs/add/:id', canActivate: [AuthGuardService], component: AddComponent},
+ // { path : 'jobs/add/:id', canActivate: [AuthGuardService], component: AddComponent},
   { path: 'jobs/delete/:id', canActivate: [AuthGuardService], component: DeleteComponent },
   { path: 'jobs/:id', canActivate: [AuthGuardService], component: DetailsComponent },
   { path: 'not-found', component: FourOhFourComponent },

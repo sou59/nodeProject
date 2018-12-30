@@ -7,6 +7,7 @@ const bcryptPassword = require('../modules/bcrypt-password');
 function create(data) {
     return UserModel.create({
         name: data.name,
+        prenom: data.prenom,
         email: data.email,
         password: data.password,
         active: true

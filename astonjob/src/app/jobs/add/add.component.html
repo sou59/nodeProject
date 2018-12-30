@@ -3,7 +3,7 @@
     <mat-card-subtitle>{{ sousTitre }}</mat-card-subtitle>
 
     <mat-card-content>
-      <form class="form-fields" [formGroup]="form" (ngSubmit)="chooseFunction()">
+      <form class="form-fields" [formGroup]="form" (ngSubmit)="addJob()">
 
           <mat-form-field class="example-full-width">
             <mat-label>Titre</mat-label>
@@ -44,8 +44,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-
-
 
           <button type="submit" [disabled]="!form.valid" mat-raised-button color="primary">Sauvegarder</button>
 

@@ -30,10 +30,12 @@ export class ListComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() { // comme un constructeur initialise la récup des données
-    this.jobsService.all().subscribe(
-      data => { // récupère la réponse: les données du formulaire
-        this.jobs = data;
-      });
+    this.jobsService
+      .all()
+      .subscribe(
+        data => { // récupère la réponse: les données du formulaire
+          this.jobs = data;
+        });
   }
 
   getMyId() {

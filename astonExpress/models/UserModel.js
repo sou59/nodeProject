@@ -1,16 +1,15 @@
 // models/JobModel.js
 
 module.exports = sequelize.define('user', {
-    nom: {
+    name: {
         type: Sequelize.STRING,
-        field: 'nom',
+        field: 'name',
         allowNulse: false, 
     },
     prenom: {
         type: Sequelize.STRING,
         field: 'prenom',
         allowNulse: false, 
-        unique: true
     },
     email: {
         type: Sequelize.STRING,

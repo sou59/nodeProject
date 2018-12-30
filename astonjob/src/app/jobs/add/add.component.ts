@@ -21,9 +21,8 @@ export class AddComponent implements OnInit {
 
   // tableau de contrat type
   contractTypes: ContractType[] = contractTypes;
-  alertMessage: String;
 
-// génération d'un groupe de champs
+  // génération d'un groupe de champs
   form: FormGroup;
   job: Job = {} as Job;
   sousTitre = '';
@@ -34,19 +33,19 @@ export class AddComponent implements OnInit {
     private flashmsgService: FlashmsgService,
     private activeRoutes: ActivatedRoute,
     private router: Router,
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-        title: '',
-        company: '',
-        city: '',
-        zipcode: '',
-        description: '',
-        contractType: '',
-        startDate: new Date(),
-        publishedDate: new Date()
-      });
+      title: '',
+      company: '',
+      city: '',
+      zipcode: '',
+      description: '',
+      contractType: '',
+      startDate: new Date(),
+      publishedDate: new Date()
+    });
 
     const id = this.activeRoutes.snapshot.paramMap.get('id') || '';
 
@@ -71,7 +70,7 @@ export class AddComponent implements OnInit {
             startDate: this.job.startDate,
             publishedDate: new Date()
           });
-      });
+        });
     }
   }
 
@@ -83,40 +82,25 @@ export class AddComponent implements OnInit {
         (job: Job) => {
           this.router.navigate(['/jobs']);
         },
-        () => {}
+        () => { }
       );
     } else {
       this.jobsService.updateJob(this.form.value, parseInt(id)).subscribe(
         (job: Job) => {
           this.router.navigate(['/jobs']);
         },
-        () => {}
+        () => { }
       );
     }
   }
 
   addJob() {
     this.jobsService// appel du service (services/jobs.service.ts)
-        .add(this.form.value)// récupère les éléments du formulaire
-          .subscribe(  // si tout se passe bien, en cas de réussite on peux utiliser les flash message pour dire sucess
-          (job: Job) => { // type Job créer dans Job.ts
-            this.flashmsgService.add('Job ajouté', 'success');
-            this.form.reset(); // vide le formulaire
-            this.router.navigate(['/jobs']);
-          },
-          (err) => {
-            console.log('Une erreur est survenue');
-          }
-        );
-    }
-/*
-  addJob() {
-    this.jobsService
-      .add(this.form.value)
-      .subscribe(
-        (job: Job) => {
-          this.alerte.add('Job ajouté', 'success');
-          this.form.reset();
+      .add(this.form.value)// récupère les éléments du formulaire
+      .subscribe(  // si tout se passe bien, en cas de réussite on peux utiliser les flash message pour dire sucess
+        (job: Job) => { // type Job créer dans Job.ts
+          this.flashmsgService.add('Job ajouté', 'success');
+          this.form.reset(); // vide le formulaire
           this.router.navigate(['/jobs']);
         },
         (err) => {
@@ -124,5 +108,5 @@ export class AddComponent implements OnInit {
         }
       );
   }
-*/
+
 }

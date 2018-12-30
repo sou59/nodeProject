@@ -18,7 +18,7 @@ export class UsersService {
   private userUrl = 'http://localhost:3000/authentication';  // URL to web api
 
   @Input() id: Number;
-  @Input() nom: string;
+  @Input() name: string;
   @Input() prenom: string;
   @Input() email: string;
   @Input() password: string;
@@ -47,8 +47,8 @@ export class UsersService {
   }
 
   // authentification--3000/login
-  loginUser (users: User): Observable<User> {
-    return this.http.post<User>(this.userUrl, users, httpOptions); // authentication
+  loginUser (user: User): Observable<User> {
+    return this.http.post<User>(this.userUrl, user, httpOptions); // authentication
   }
 
 /*

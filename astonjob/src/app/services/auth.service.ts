@@ -11,9 +11,9 @@ export class AuthService {
   API_URL = 'http://localhost:3000';
   TOKEN_KEY = 'token';
 
-  constructor(private http: HttpClient, private router: Router,
-    private cookieService: CookieService,
-    private route: Router) { }
+  constructor(private http: HttpClient,
+              private router: Router,
+              private cookieService: CookieService) { }
 
   checkToken() {
     return this.cookieService.check('token');
@@ -22,7 +22,21 @@ export class AuthService {
   getToken() {
     return this.cookieService.get('token');
   }
-
+/*
+  loginWithEmailAndPassword(email: string, password: string) {
+    return this.http.post<any>(`${this.API_URL}/authentication`,
+        new HttpParams({fromObject: {email, password}}),
+        {
+          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        }
+      ).pipe(map(user => {
+        if (user && user.token) {
+          this.cookieService.set('token', user.token);
+        }
+        return user;
+      }));
+  }
+*/
   login(email: string, password: string) {
     return this.http.post<any>(`${this.API_URL}/authentication`,
       new HttpParams({ fromObject: { email, password } }),
@@ -32,7 +46,6 @@ export class AuthService {
     ).pipe(map(user => {
       if (user && user.token) {
         this.cookieService.set('token', user.token);
-
       }
       return user;
     }));
@@ -40,16 +53,16 @@ export class AuthService {
 
   logout() {
     this.cookieService.delete('token');
-    this.route.navigate(['/auth/signin']);
+    this.router.navigate(['/auth/signin']);
   }
 
   isLoggedIn() {
-    return this.cookieService.check('token') !== null;
+    return this.cookieService.check('token') !== null; // !== null
   }
 
-  register(nom, prenom, password, email) {
+  register(name, prenom, password, email) {
     return this.http.post<any>(`${this.API_URL}/register`,
-      new HttpParams({ fromObject: { nom, prenom, password, email } }),
+      new HttpParams({ fromObject: { name, prenom, password, email } }),
       {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
       }

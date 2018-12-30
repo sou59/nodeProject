@@ -20,11 +20,15 @@ exports.findAll = data => {
 };
 
 exports.findById = data => {
-    return JobModel.findById(data); // même nom que l'exports ici
+    return JobModel.findById(id); // même nom que l'exports ici
 }
 
 exports.delete = id => {
-    return JobModel.destroy(id);
+    return Job.findById(id).then(
+        data => {
+            data.destroy();
+        }
+    );
 }
 
 exports.update = data => {
@@ -38,8 +42,8 @@ exports.update = data => {
         contractType: data.company,
         startDate: new Date(data.startDate),
         publishedDate: new Date(data.publishedDate)
-    }, 
-    { where: {id: data.id} }
+    },
+        { where: { id: data.id } }
     );
 }
 

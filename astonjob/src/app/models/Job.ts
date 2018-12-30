@@ -11,3 +11,4 @@ export interface Job {
     startDate: Date;
     publishedDate: Date;
 }
+

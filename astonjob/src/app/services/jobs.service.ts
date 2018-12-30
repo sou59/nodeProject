@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Job } from '../models/Job';
 import { Observable, Subject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { ContractType } from '../models/ContractType';
 
-const API_BASE_URL = 'http://localhost:3000/jobs';
+const API_BASE_URL = 'http://localhost:3000/api/jobs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,11 @@ export class JobsService {
   @Input() city: string;
   @Input() zipcode: string;
   @Input() description: string;
-  @Input() contractTypes: number;
+  @Input() contractType: ContractType;
   @Input() startDate: Date;
+  @Input() publishedDate: Date;
   @Input() index: number;
+
 
   constructor(private http: HttpClient) { }
 

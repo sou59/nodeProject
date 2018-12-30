@@ -13,13 +13,7 @@
     <li>Contract type : {{ job.contractType }}</li>
     <li>Start date : {{ job.startDate | date:'dd/MM/y H:m:s'  }}</li>
     <li>
-        <button class="btn btn-success bouton1" color="primary" >
-          <a mat-list-item href="#" routerLink="/jobs/add/{{ job.id }}">Editer</a>
-        </button>
-
-        <a [routerLink]='[job.id]'>Détail</a>
-
-        <button routerLink="/jobs/delete/{{ job.id }}" color="warn">Supprimer</button>
+      <button mat-button routerLink="/jobs/{{ job.id }}">Détails</button>
     </li>
 
     <hr>

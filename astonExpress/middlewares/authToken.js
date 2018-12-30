@@ -14,7 +14,7 @@ exports.token = (pass) => {
         // console.log('My midelware')
         const token = req.query.token;
         if (token !== pass) {
-            res.json({ error: 'degage!' });
+            res.json({ error: 'Interdit de passer!' });
         } else {
             next();
         }

@@ -14,15 +14,17 @@ export class AuthGuardService implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> |
     boolean {
-
-    if (this.authService.isLoggedIn()) {
-     // this.router.navigate(['/jobs']);
+      const isLoggedIn = this.authService.isLoggedIn();
+    if (!isLoggedIn) {
+      this.router.navigate(['/auth/signin']);
+      console.log('Vous êtes non connectés');
       return true;
     }
-      console.log('Vous êtes non connectés');
-      this.router.navigate(['/auth/signin']);
+    return isLoggedIn;
+     // console.log('Vous êtes non connectés');
+     // this.router.navigate(['/auth/signin']);
         // this.router.navigate(['/signin'], { queryParams: { redirectUrl: state.url } }
-      return false;
+     // return false;
   }
 
 }

@@ -1,4 +1,4 @@
 export interface ContractType  {
-    id: Number,
-    label: string
+    id: Number;
+    label: string;
 }

@@ -5,7 +5,6 @@ module.exports = sequelize.define('job', {
         type: Sequelize.STRING,
         field: 'title',
         allowNulse: false,
-        unique: true
     },
     company: {
         type: Sequelize.STRING,

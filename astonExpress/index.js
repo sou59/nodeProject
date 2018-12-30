@@ -5,6 +5,8 @@ const pug = require('pug');
 const path = require('path');
 const config = require('./config');
 const cors = require('./middlewares/cors');
+//const cors = require('cors');
+
 const cookieParser = require('cookie-parser');
 const jwtCheck = require('./middlewares/jwt-check');
 const dbPassword = '$2b$10$20VHqNYTiKy4u7Ivi26k3O7zoEkhXQA33TOB4indGW5vJMs8sCaGq';
@@ -27,7 +29,7 @@ conf = config.load();
 // import de la bibliothèque
 Sequelize = require('sequelize');
 sequelize = new Sequelize(conf.db.default.url, {
-    logging: false, // valeur en dev
+    logging: true, // valeur en dev
     operatorsAliases: false
 });
 
@@ -70,9 +72,10 @@ app.use(express.static(path.join(__dirname, 'public'))); // dossier public acces
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors);
-api.use(cors);
+//app.use(cors);
 app.use(cookieParser());
 
+api.use(cors);
 api.use(cookieParser());
 api.use(jwtCheck);
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées
