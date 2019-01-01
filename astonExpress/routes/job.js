@@ -3,18 +3,27 @@
 // appel controllers
 const controllers = require('../controllers/job');
 
-// localhost:3000/api/jobs
+/**
+ * http://localhost:3000/api/jobs
+ */
 api.post('/jobs', controllers.create);
-api.post('/jobs/add', controllers.create);
-// localhost:3000/api/jobs
+
+/**
+ * http://localhost:3000/api/jobs
+ */
 api.get('/jobs', controllers.all);
 
-// localhost:3000/api/jobs/5
+/**
+ * http://localhost:3000/api/jobs/5
+ */
 api.get('/jobs/:id', controllers.find);
 
-// localhost:3000/api/jobs/5
+/**
+ * http://localhost:3000/api/jobs/12
+ */
 api.delete('/jobs/:id', controllers.delete);
 
-// localhost:3000/api/jobs
+/**
+ * http://localhost:3000/api/jobs
+ */
 api.put('/jobs', controllers.update);
-

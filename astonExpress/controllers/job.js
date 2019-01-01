@@ -16,7 +16,7 @@ exports.create = (req, res) => {
 }
 
 exports.all = (req, res) => {
-    console.log(req.payload); // on peut récupérer les infoc partout
+    console.log(req.payload); // on peut récupérer les infos partout
 
     JobService.findAll()
         .then(
@@ -42,6 +42,18 @@ exports.find = (req, res) => {
         );
 }
 
+
+exports.update = (req, res) => {
+    JobService.update(req.body)
+        .then(data => {
+            res.status(204).json(); // () ne pas oublier les parenthèses
+        },
+            err => {
+                res.status(204).json(err);
+            }
+        );
+}
+
 exports.delete = (req, res) => {
     const id = req.params.id;
     JobService.delete({
@@ -53,17 +65,6 @@ exports.delete = (req, res) => {
             },
             (err) => {
                 res.status(500).json(err);
-            }
-        );
-}
-
-exports.update = (req, res) => {
-    JobService.update(req.body)
-        .then(data => {
-            res.status(204).json(); // () ne pas oublier les parenthèses
-        },
-            err => {
-                res.status(204).json(err);
             }
         );
 }

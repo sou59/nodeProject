@@ -18,13 +18,15 @@ export class AuthGuardService implements CanActivate {
     if (!isLoggedIn) {
       this.router.navigate(['/auth/signin']);
       console.log('Vous êtes non connectés');
-      return true;
+      return false;
     }
-    return isLoggedIn;
+    return true;
+    // return isLoggedIn;
      // console.log('Vous êtes non connectés');
      // this.router.navigate(['/auth/signin']);
         // this.router.navigate(['/signin'], { queryParams: { redirectUrl: state.url } }
      // return false;
   }
+
 
 }

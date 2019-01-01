@@ -3,8 +3,8 @@ const jwt = require('jsonwebtoken');
 // clé secrete à ne jamais perdre
 const JWT_SECRET_KEY = 'dskjh@jkhjkh&RRTdssdfsd213154654231piuQSD&llf$jksks';
 
-// récupération des donnees de l'user, e jamais mettre de données sensible, pas dans les sessions non plus
-// ici mode asynchrone donc on ne retourne rienn ici callback donc asynchrone
+// récupération des donnees de l'user, ne jamais mettre de données sensible, pas dans les sessions non plus
+// ici mode asynchrone donc on ne retourne rien ici callback donc asynchrone
 exports.generateToken = (user, callback) => {
     jwt.sign(
         {
@@ -14,7 +14,7 @@ exports.generateToken = (user, callback) => {
         JWT_SECRET_KEY,
         {
             algorithm: 'HS256',
-            expiresIn: 120
+            expiresIn: 1200
         },
         callback
     );

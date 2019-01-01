@@ -18,6 +18,7 @@ app = express(); // pages publiques
 
 api = express.Router(); // api sécuriser
 
+
 // utilise le router pour toutes les pages qui commencent par api
 // ET SURTOUT NE PAS OUBLIER LE /
 app.use('/api', api);
@@ -71,9 +72,9 @@ app.use(morgan('combined')); // mettre en conf
 app.use(express.static(path.join(__dirname, 'public'))); // dossier public accessible avec es images
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(cors);
-//app.use(cors);
 app.use(cookieParser());
+app.use(cors);
+
 
 api.use(cors);
 api.use(cookieParser());
@@ -81,6 +82,7 @@ api.use(jwtCheck);
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());
+
 
 // configuration du moteur de template pug
 app.set('view engine', 'pug');

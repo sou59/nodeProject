@@ -57,7 +57,6 @@ export class SignupComponent implements OnInit {
       );
   }
 
-
   /*
   getUsers() {
     return this.userService.getUsers()

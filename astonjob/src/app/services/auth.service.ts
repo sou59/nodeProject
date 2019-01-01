@@ -22,21 +22,7 @@ export class AuthService {
   getToken() {
     return this.cookieService.get('token');
   }
-/*
-  loginWithEmailAndPassword(email: string, password: string) {
-    return this.http.post<any>(`${this.API_URL}/authentication`,
-        new HttpParams({fromObject: {email, password}}),
-        {
-          headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-        }
-      ).pipe(map(user => {
-        if (user && user.token) {
-          this.cookieService.set('token', user.token);
-        }
-        return user;
-      }));
-  }
-*/
+
   login(email: string, password: string) {
     return this.http.post<any>(`${this.API_URL}/authentication`,
       new HttpParams({ fromObject: { email, password } }),
@@ -57,7 +43,7 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return this.cookieService.check('token') !== null; // !== null
+    return this.cookieService.check('token'); // !== null
   }
 
   register(name, prenom, password, email) {
