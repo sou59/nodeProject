@@ -32,7 +32,7 @@ exports.authentication = (req, res) => {
             jwt.generateToken(user, (err, token) => {
                 // console.log(token);
                 res.cookie('token', token, {
-                    maxAge: 1000,
+                    maxAge: 1200,
                     httpOnly: true
                 });
                 res.json(user);

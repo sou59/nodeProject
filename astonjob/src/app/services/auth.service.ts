@@ -43,7 +43,7 @@ export class AuthService {
   }
 
   isLoggedIn() {
-    return this.cookieService.check('token'); // !== null
+    return this.cookieService.check('token') !== null; // !== null
   }
 
   register(name, prenom, password, email) {
