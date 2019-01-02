@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Connexion</h2>
-  <form [formGroup]="signInForm" (ngSubmit)="login()">
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
     <div class="form-group">
       <label for="email">Adresse mail</label>
       <input type="text"
@@ -17,7 +17,7 @@
     </div>
     <button class="btn btn-primary"
             type="submit"
-            [disabled]="signInForm.invalid">Connexion</button>
+            [disabled]="loginForm.invalid">Connexion</button>
   </form>
   <p class="text-danger">{{ errorMessage }}</p>
 </div>

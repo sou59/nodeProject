@@ -6,10 +6,9 @@ module.exports = (req, res, next) => {
         if (err) {
             res.status(401).json({ message: err.message });
         } else {
-            if(!req.payload)
-                {
-                    req.payload = decoded
-                }
+            if (!req.payload) {
+                req.payload = decoded
+            }
             next();
         }
     });

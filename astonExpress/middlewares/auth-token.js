@@ -11,7 +11,6 @@ parametre route
 // closure
 exports.token = (pass) => {
     return (req, res, next) => {
-        // console.log('My midelware')
         const token = req.query.token;
         if (token !== pass) {
             res.json({ error: 'Interdit de passer!' });

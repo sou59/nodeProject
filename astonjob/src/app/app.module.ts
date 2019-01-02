@@ -36,7 +36,7 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthService } from './services/auth.service';
-import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { WithCredentialInterceptor } from './services/auth-interceptor.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthGuardService } from './services/auth-guard.service';
 
@@ -101,7 +101,7 @@ const routes: Route[] = [
     CookieService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptorService,
+      useClass: WithCredentialInterceptor,
       multi: true
     }
 

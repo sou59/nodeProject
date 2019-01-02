@@ -6,6 +6,7 @@ import { UsersService } from '../../services/users.service';
 import { FlashmsgService } from 'src/app/services/flashmsg.service';
 import { User } from 'src/app/models/User';
 import { CookieService } from 'ngx-cookie-service';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-signin',
@@ -14,8 +15,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class SigninComponent implements OnInit {
 
-  signInForm: FormGroup;
+  loginForm: FormGroup;
   errorMessage: string;
+  returnUrl: string;
 
   constructor(private formBuilder: FormBuilder,
     private authService: AuthService,
@@ -26,15 +28,22 @@ export class SigninComponent implements OnInit {
     private cookieService: CookieService) { }
 
   ngOnInit() {
-    this.initForm();
-  }
-
-  initForm() {
-    this.signInForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    // reset login status.
+    this.authService.logout();
+
+    // Get return url form route parameters or default to '/'.
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
+
+  get form() {
+    return this.loginForm.controls;
+  }
+
 
   /*
     onSubmit() {
@@ -50,26 +59,44 @@ export class SigninComponent implements OnInit {
       );
     }
   */
-  login() {
-    const email = this.signInForm.get('email').value;
-    const password = this.signInForm.get('password').value;
-    // On récupère l'url de redirection
-   // const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/home';
+  /*
+   login() {
+     const email = this.signInForm.get('email').value;
+     const password = this.signInForm.get('password').value;
+     // On récupère l'url de redirection
+    // const redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/home';
 
-    this.authService
-      .login(email, password)
+     this.authService
+       .login(email, password)
+       .subscribe(
+         (user: User) => {
+           this.flashmsgService.add('User valide', 'success');
+           this.signInForm.reset();
+           // On accède à la page souhaitée
+          // this.router.navigate([redirectUrl]);
+          this.router.navigate(['/jobs']);
+         },
+         (err) => {
+           console.log('Une erreur est survenue');
+         }
+       );
+   }
+ */
+
+  login() {
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.authService.login(this.form.email.value, this.form.password.value)
+      .pipe(first())
       .subscribe(
-        (user: User) => {
-          this.flashmsgService.add('User valide', 'success');
-          this.signInForm.reset();
-          // On accède à la page souhaitée
-         // this.router.navigate([redirectUrl]);
-         this.router.navigate(['/jobs']);
+        data => {
+          this.router.navigate([this.returnUrl]);
         },
-        (err) => {
-          console.log('Une erreur est survenue');
+        error => {
+          this.errorMessage = error;
         }
       );
   }
-
 }

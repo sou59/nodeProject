@@ -1,3 +1,4 @@
+const config = require('../config').load();
 const jwt = require('jsonwebtoken');
 
 // clé secrete à ne jamais perdre

@@ -12,16 +12,33 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> |
-    boolean {
-      const isLoggedIn = this.authService.isLoggedIn();
-    if (!isLoggedIn) {
-      this.router.navigate(['/auth/signin']);
-      console.log('Vous êtes non connectés');
-      return false;
-    }
-    return true;
+    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    const currentUser = this.authService.currentUserValue;
 
+    if (currentUser) {
+      console.log(currentUser);
+      // logged in so return true.
+      return true;
+    }
+
+    this.router.navigate(['/auth/signin'], { queryParams: { returnUrl: state.url } });
+    return false;
   }
+
+/*
+canActivate(
+  next: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> |
+  boolean {
+    const isLoggedIn = this.authService.isLoggedIn();
+  if (!isLoggedIn) {
+    this.router.navigate(['/auth/signin']);
+    console.log('Vous êtes non connectés');
+    return false;
+  }
+  return true;
+
+}
+*/
 
 }

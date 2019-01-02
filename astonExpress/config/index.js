@@ -1,23 +1,29 @@
-/*
-app.get('env') === NODE_ENV
- console.log(app.get('env'));
-*/
 const fs = require('fs');
 const path = require('path');
+const merge = require('merge');
 
-let config = null;
+let global = {},
+    config = null;
 
 function loadFile(filename) {
-    if (!fs.existsSync(filename)) {
-        throw new Error(`"${filename}" does not exist`)
+    const file = path.join(__dirname, filename) + '.json';
+
+    if (!fs.existsSync(file)) {
+        throw new Error(`${file} does not exists`);
     }
+    return require(file);
+};
+
+/**
+ * app.get('env') === NODE_ENV
+ */
+exports.load = () => {
     if (config === null) {
-        config = require(filename);
+        const env = process.env.NODE_ENV || 'development';
+
+        global = loadFile('global');
+        config = loadFile(env);
+        config = merge.recursive(false, global, config);
     }
     return config;
-}
-
-exports.load = () => {
-    const env = app.get('env');
-    return loadFile(path.join(__dirname, `${env}.json`));
-}
+};

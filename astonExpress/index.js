@@ -5,21 +5,25 @@ const pug = require('pug');
 const path = require('path');
 const config = require('./config');
 const cors = require('./middlewares/cors');
-const jwt = require('jsonwebtoken');
-//const cors = require('cors');
-
 const cookieParser = require('cookie-parser');
 const jwtCheck = require('./middlewares/jwt-check');
 const dbPassword = '$2b$10$20VHqNYTiKy4u7Ivi26k3O7zoEkhXQA33TOB4indGW5vJMs8sCaGq';
-const authToken = require('./middlewares/authToken');
+const authToken = require('./middlewares/auth-token');
 const basicAuth = require('express-basic-auth');
 const modulejwt = require('./modules/jwt');
+const jwt = require('jsonwebtoken');
+const https = require('https');
+const pem = require('pem');
+const fs = require('fs');
+
+const corsOptions = {
+    credentials: true,
+    origin: 'http://localhost:4200'
+};
 
 // en premier création de l'application
 app = express(); // pages publiques
-
 api = express.Router(); // api sécuriser
-
 
 // utilise le router pour toutes les pages qui commencent par api
 // ET SURTOUT NE PAS OUBLIER LE /
@@ -34,13 +38,15 @@ conf = config.load();
 Sequelize = require('sequelize');
 sequelize = new Sequelize(conf.db.default.url, {
     logging: true, // valeur en dev
+    freezeTableName: true,
     operatorsAliases: false
 });
- 
+
 // forcer la création des tables si elle n'existe pas : {force: true} pour la création de la base
-sequelize.sync({ force: false }).then(() => {
-    console.log('La bdd a bien été crée.');
-});
+sequelize.sync({ force: false })
+    .then(() => {
+        console.log('La bdd a bien été crée.');
+    });
 
 /*
 /jobs/:id       === req.params.id
@@ -66,26 +72,24 @@ app.use(basicAuth({
 // appel de la fonction token sans les parathèses
 // app.use(authToken.token('toto'));
 
+// App
+
 // pour les chemins de fichier
 // console.log(path.join(__dirname, 'views'));
 // 'combined' = donne information entrante et sortante
 // ('tiny')
 // middelwares app.use()
+app.use(cors(corsOptions));
 app.use(morgan('combined')); // mettre en conf
 app.use(express.static(path.join(__dirname, 'public'))); // dossier public accessible avec es images
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 app.use(cookieParser());
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-  
-// app.use(cors);
 
 
-api.use(cors);
+// Api
+api.use(cors(corsOptions));
 api.use(cookieParser());
 api.use(jwtCheck);
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées
@@ -98,12 +102,26 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 app.locals.pretty = true; // compresser pour la prod
 
-// tranférer dans controller et route
+
+/**
+ * Démarrage du serveur.
+ * 
+ * @see https://www.npmjs.com/package/pem#express
+ */
+
 /*
-app.get('/', (req, res) => {
-    res.render('home', { title: 'Titre de la page' });
+pem.createCertificate({ days: 5, selfSigned: true }, (err, keys) => {
+    // Chargement des routes.
+    require(path.join(__dirname, 'routes'));
+
+    https.createServer({ key: keys.serviceKey, cert: keys.certificate }, app)
+        .listen(conf.server.port);
+
+    fs.writeFileSync(path.join('data', 'ssl', 'jobs.cert'), keys.certificate, 'utf8');
+    fs.writeFileSync(path.join('data', 'ssl', 'jobs.key'), keys.clientKey, 'utf8');
 });
 */
+
 // chargement des routes
 // require('./routes/index)
 require(path.join(__dirname, 'routes'));
@@ -112,3 +130,4 @@ require(path.join(__dirname, 'routes'));
 app.listen(conf.server.port, () => {
     console.log('Server is running');
 });
+

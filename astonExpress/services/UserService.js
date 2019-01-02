@@ -52,38 +52,3 @@ exports.authenticate = data => {
 
 exports.create = create;
 exports.findByMail = findByMail;
-
-/*
-exports.create = data => {
-    return UserModel.create({
-        name: data.name,
-        email: data.email,
-        password: data.password,
-        active: data.active
-    });
-};
-*/
-
-/*
-exports.find = (attribut) => {
-    return UserModel.findOne({
-        where: attribut
-    });
-}
-
-exports.findAll = data => {
-    return UserModel.findAll();
-}
-
-exports.delete = (id) => {
-    return UserModel.destroy({
-        where: { id: id }
-    });
-}
-
-exports.update = (data) => {
-    return UserModel.update(data, {
-        where: { id: data.id }
-    });
-}
-*/

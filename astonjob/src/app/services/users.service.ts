@@ -51,6 +51,10 @@ export class UsersService {
     return this.http.post<User>(this.userUrl, user, httpOptions); // authentication
   }
 
+  all(): Observable<User[]> {
+    return this.http.get<User[]>('/users');
+}
+
 /*
   deleteUser (user: User | number): Observable<User> {
     const id = typeof user === 'number' ? user : user.id;
