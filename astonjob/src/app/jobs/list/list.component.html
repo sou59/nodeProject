@@ -1,6 +1,23 @@
 <!--affichage des données faire un ngfor faire delete et update -->
 
-  <h2>Liste des Jobs</h2>
+<mat-card class="list-card" *ngFor="let job of jobs">
+
+  <mat-card-title>{{ job.title | titlecase  }}</mat-card-title>
+  <mat-card-subtitle>{{ job.company | titlecase }}</mat-card-subtitle>
+
+  <mat-card-content>
+      <p>{{ job.description }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+      <button mat-button routerLink="/jobs/{{ job.id }}">Détails</button>
+  </mat-card-actions>
+</mat-card>
+
+
+
+<!--
+<h2>Liste des Jobs</h2>
 
   <ul class="pt-5" *ngFor="let job of jobs; let i = index" (click)="onViewJob(i)">
 
@@ -18,20 +35,4 @@
 
     <hr>
   </ul>
-
-  <!--
-  <div *ngFor="let job of jobs">
-      <mat-card class="listeCard">
-        <mat-card-title><a mat-list-item href="#" routerLink="jobs/add/job.id"></a></mat-card-title>
-        <mat-label>Entreprise</mat-label>
-        <mat-label></mat-label>
-        <div class="buttonContainer">
-          <button class="btn btn-success bouton1" color="primary" ><a mat-list-item href="#" routerLink="/jobs/add/{{job.id}}">Editer</a></button>
-          <button class="btn btn-success bouton1" color="primary" (click)="supprJob(job.id)">Supprimer</button>
-          <a [routerLink]='[job.id]'>Détail</a>
-          <button class="btn btn-danger" (click)="deleteJob(job)">
-              Delete Job</button>
-        </div>
-      </mat-card>
-    </div>
 -->

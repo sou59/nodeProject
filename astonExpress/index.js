@@ -20,7 +20,7 @@ const corsOptions = {
     credentials: true,
     origin: 'http://localhost:4200'
 };
-
+ 
 // en premier création de l'application
 app = express(); // pages publiques
 api = express.Router(); // api sécuriser
@@ -31,18 +31,32 @@ app.use('/api', api);
 
 //config.load();
 conf = config.load();
+
 console.log(conf.db.default.url);
 
 // base de données le plus haut possible, si elle crache rien d'autre ne passe
 // import de la bibliothèque
 Sequelize = require('sequelize');
+
 sequelize = new Sequelize(conf.db.default.url, {
     logging: true, // valeur en dev
     //freezeTableName: true,
     operatorsAliases: false
 });
 
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
+// sequelize.sync({ force: true, logging: console.log });
+
 // forcer la création des tables si elle n'existe pas : {force: true} pour la création de la base
+
 sequelize.sync({ force: false })
     .then(() => {
         console.log('La bdd a bien été crée.');
@@ -88,13 +102,12 @@ app.use(cookieParser());
 
 
 // Api
-api.use(cors(corsOptions));
 api.use(cookieParser());
 api.use(jwtCheck);
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());
-
+api.use(cors(corsOptions));
 
 // configuration du moteur de template pug
 app.set('view engine', 'pug');

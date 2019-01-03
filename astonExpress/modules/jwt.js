@@ -15,7 +15,7 @@ exports.generateToken = (user, callback) => {
         JWT_SECRET_KEY,
         {
             algorithm: 'HS256',
-            expiresIn: 1200
+            expiresIn: 120
         },
         callback
     );

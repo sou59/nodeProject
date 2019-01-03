@@ -13,31 +13,32 @@ const API_BASE_URL = 'https://localhost:3000/api/jobs';
 
 export class JobsService {
 
-  jobs: Job[] = [];
-
-  @Input() id: Number;
-  @Input() title: string;
-  @Input() company: string;
-  @Input() city: string;
-  @Input() zipcode: string;
-  @Input() description: string;
-  @Input() contractType: ContractType;
-  @Input() startDate: Date;
-  @Input() publishedDate: Date;
-  @Input() index: number;
-
-
   constructor(private http: HttpClient) { }
 
   // ajouter ne pas oublier le return, en paramètre l'adresse de l'api et le job
+  /**
+   * Add a new job.
+   */
   add(job: Job) {
-    return this.http.post(API_BASE_URL, job);
+    return this.http.post(API_BASE_URL, job, {
+      withCredentials: true
+    });
   }
 
+/*
   // trouver un seul job par id
   find(id: Number): Observable<Job> {
     const url = API_BASE_URL + '/' + id;
     return this.http.get<Job>(url)
+      .pipe(map(res => res));
+  }
+*/
+
+/**
+   * Find a job by its ID.
+   */
+  find(id: Number) {
+    return this.http.get(`${API_BASE_URL}/${id}`)
       .pipe(map(res => res));
   }
 

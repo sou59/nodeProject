@@ -4,9 +4,6 @@ import { User } from '../models/User';
 import { Observable } from 'rxjs';
 
 const API_BASE_URL = 'https://localhost:3000/registerapi';
-const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
 
 @Injectable({
   providedIn: 'root'
@@ -43,12 +40,12 @@ export class UsersService {
 */
 // 3000/registerapi
   addUser(users: User): Observable<User> {
-    return this.http.post<User>(API_BASE_URL, users, httpOptions); // register
+    return this.http.post<User>(API_BASE_URL, users); // register
   }
 
   // authentification--3000/login
   loginUser (user: User): Observable<User> {
-    return this.http.post<User>(this.userUrl, user, httpOptions); // authentication
+    return this.http.post<User>(this.userUrl, user); // authentication
   }
 
   all(): Observable<User[]> {

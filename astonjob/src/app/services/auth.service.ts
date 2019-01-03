@@ -15,8 +15,6 @@ const LOCAL_STORAGE_USER_KEY = 'currentItem';
 
 export class AuthService {
 
- API_URL = 'https://localhost:3000';
-
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -89,10 +87,10 @@ login(email: string, password: string) {
   register(name, prenom, password, email) {
     return this.http.post<any>(`${API_BASE_URL}/register`,
       new HttpParams({ fromObject: { name, prenom, password, email } }),
-     /* {
+      {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
       }
-      */
+
     )
       .pipe(map(user => {
         console.log(user);

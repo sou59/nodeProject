@@ -9,11 +9,16 @@ parametre route
 
 // pass permet de modifier le pass dans app et dans app on peut le modifier
 // closure
-exports.token = (pass) => {
+/**
+ * app.use(authToken('abcd'));
+ * http://localhost:3000/?token=abcd
+ */
+module.exports = (pass) => {
     return (req, res, next) => {
         const token = req.query.token;
+
         if (token !== pass) {
-            res.json({ error: 'Interdit de passer!' });
+            res.json({ error: 'Interdit!' });
         } else {
             next();
         }

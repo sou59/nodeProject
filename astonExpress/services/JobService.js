@@ -23,11 +23,20 @@ exports.findById = data => {
     return JobModel.findById(id); // même nom que l'exports ici
 }
 
+/*
 exports.delete = id => {
     return Job.findById(id).then(
         data => {
             data.destroy();
         }
+    );
+}
+*/
+
+// vincent : 
+exports.delete = id => {
+    return JobModel.findByPk(id).then(
+        data => data.destroy()
     );
 }
 

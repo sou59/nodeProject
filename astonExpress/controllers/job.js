@@ -10,13 +10,14 @@ exports.create = (req, res) => {
                 res.status(201).json(data);
             },
             (err) => {
+                console.log(err.original.sqlMessage || err);
                 res.status(500).json(err);
             }
         );
 }
 
 exports.all = (req, res) => {
-    console.log(req.payload); // on peut récupérer les infos partout
+    console.log(req.payload  || ''); // on peut récupérer les infos partout
 
     JobService.findAll()
         .then(
@@ -55,6 +56,20 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
+    JobService.delete(req.params.id)
+        .then(
+            data => {
+                res.status(204).json();
+            },
+            err => {
+                res.status(500).json(err);
+            }
+        );
+};
+
+
+/*
+exports.delete = (req, res) => {
     const id = req.params.id;
     JobService.delete({
         where: { id: id }
@@ -68,3 +83,4 @@ exports.delete = (req, res) => {
             }
         );
 }
+*/

@@ -47,6 +47,7 @@ export class AddComponent implements OnInit {
       publishedDate: new Date()
     });
 
+    /*
     const id = this.activeRoutes.snapshot.paramMap.get('id') || '';
 
     if (id === '') {
@@ -72,8 +73,10 @@ export class AddComponent implements OnInit {
           });
         });
     }
+    */
   }
 
+  /*
   chooseFunction() {
     const id = this.activeRoutes.snapshot.paramMap.get('id') || '';
 
@@ -93,6 +96,7 @@ export class AddComponent implements OnInit {
       );
     }
   }
+*/
 
   addJob() {
     this.jobsService// appel du service (services/jobs.service.ts)

@@ -19,12 +19,15 @@ exports.registerapi = (req, res) => {
                 res.status(201).json(user);
             },
             err => {
-                console.log(err.original.sqlMessage);
+                console.log(err.original.sqlMessage || err);
                 res.status(500).json({ message: "Internal Server Error" });
             }
         );
 };
 
+/**
+ * @see https://github.com/auth0/node-jsonwebtoken#usage
+ */
 exports.authentication = (req, res) => {
     UserService.authenticate(req.body).then(
         user => {
@@ -32,7 +35,7 @@ exports.authentication = (req, res) => {
             jwt.generateToken(user, (err, token) => {
                 // console.log(token);
                 res.cookie('token', token, {
-                    maxAge: 1200,
+                    maxAge: 12 * 3600000,
                     httpOnly: true
                 });
                 res.json(user);
@@ -45,16 +48,6 @@ exports.authentication = (req, res) => {
     )
 };
 
-
-/*
-// génération du cookie
-    var Cookies = require( "cookies" );
-
-    new Cookies(request, response).set('access_token',token, {
-        httpOnly: true, //cookie not available through client js code
-        secure: false // true to force https
-    });
-*/
 
 // authenticate = login
 /*
