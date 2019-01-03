@@ -29,16 +29,16 @@ api = express.Router(); // api sécuriser
 // ET SURTOUT NE PAS OUBLIER LE /
 app.use('/api', api);
 
-
 //config.load();
 conf = config.load();
+console.log(conf.db.default.url);
 
 // base de données le plus haut possible, si elle crache rien d'autre ne passe
 // import de la bibliothèque
 Sequelize = require('sequelize');
 sequelize = new Sequelize(conf.db.default.url, {
     logging: true, // valeur en dev
-    freezeTableName: true,
+    //freezeTableName: true,
     operatorsAliases: false
 });
 
@@ -84,7 +84,6 @@ app.use(morgan('combined')); // mettre en conf
 app.use(express.static(path.join(__dirname, 'public'))); // dossier public accessible avec es images
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
 app.use(cookieParser());
 
 
@@ -108,20 +107,19 @@ app.locals.pretty = true; // compresser pour la prod
  * 
  * @see https://www.npmjs.com/package/pem#express
  */
-
-/*
 pem.createCertificate({ days: 5, selfSigned: true }, (err, keys) => {
     // Chargement des routes.
     require(path.join(__dirname, 'routes'));
-
+    //console.log(keys, err);
+ 
     https.createServer({ key: keys.serviceKey, cert: keys.certificate }, app)
         .listen(conf.server.port);
 
     fs.writeFileSync(path.join('data', 'ssl', 'jobs.cert'), keys.certificate, 'utf8');
     fs.writeFileSync(path.join('data', 'ssl', 'jobs.key'), keys.clientKey, 'utf8');
 });
-*/
 
+/*
 // chargement des routes
 // require('./routes/index)
 require(path.join(__dirname, 'routes'));
@@ -131,3 +129,4 @@ app.listen(conf.server.port, () => {
     console.log('Server is running');
 });
 
+*/

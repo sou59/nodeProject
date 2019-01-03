@@ -1,5 +1,5 @@
 <div class="container">
-<form method="POST" action="" [formGroup]="signupForm" (ngSubmit)="addUser()">
+<form method="POST" [formGroup]="signupForm" (ngSubmit)="addUser()">
   <div class="form-group">
     <label for="name">Nom</label>
     <input class="form-control" id="name" type="text" placeholder="Enter name" required formControlName="name">

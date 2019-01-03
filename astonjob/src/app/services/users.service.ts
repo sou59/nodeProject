@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
 
-const API_BASE_URL = 'http://localhost:3000/registerapi';
+const API_BASE_URL = 'https://localhost:3000/registerapi';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -15,7 +15,7 @@ const httpOptions = {
 export class UsersService {
 
   users: User[] = [];
-  private userUrl = 'http://localhost:3000/authentication';  // URL to web api
+  private userUrl = 'https://localhost:3000/authentication';  // URL to web api
 
   @Input() id: Number;
   @Input() name: string;

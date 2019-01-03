@@ -1,6 +1,6 @@
 {
     "app": {
-        "name": "Aston API PROD",
+        "name": "Aston API DEV",
         "version": "0.1.0"
     },
     "db": {
