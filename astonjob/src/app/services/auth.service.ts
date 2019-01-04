@@ -16,7 +16,7 @@ const LOCAL_STORAGE_USER_KEY = 'currentItem';
 export class AuthService {
 
   private currentUserSubject: BehaviorSubject<User>;
-  public currentUser: Observable<User>;
+  public currentUser: Observable<User> = null;
 
   constructor(private http: HttpClient,
     private router: Router,
@@ -27,6 +27,10 @@ export class AuthService {
 
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
+}
+
+isLoggedIn() {
+  return this.currentUser != null;
 }
 
 login(email: string, password: string) {
@@ -81,7 +85,7 @@ login(email: string, password: string) {
   }
 
   isLoggedIn() {
-    return this.cookieService.check('token') !== null; // !== null
+    return this.cookieService.check('token'); // !== null
   }
 */
   register(name, prenom, password, email) {
