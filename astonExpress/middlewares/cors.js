@@ -36,7 +36,7 @@ module.exports = options => {
 
         res.header('Accept', 'application/json');
         res.header('Access-Control-Allow-Origin', opts.origin);
-        res.header('Access-Control-Max-Age', 60); // 86400
+        res.header('Access-Control-Max-Age', 3600); // 86400
         res.header('Access-Control-Allow-Credentials', opts.credentials);
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE');
         res.header('Access-Control-Allow-Headers', headers.join(','));

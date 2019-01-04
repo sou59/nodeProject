@@ -12,7 +12,7 @@
         "addr": "localhost",
         "port": 3000,
         "jwt": {
-            "expiresIn": 180
+            "expiresIn": 3600
         }
     }
 }

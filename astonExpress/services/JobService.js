@@ -19,9 +19,9 @@ exports.findAll = data => {
     return JobModel.findAll();
 };
 
-exports.findById = data => {
+exports.findById = id => {
     return JobModel.findById(id); // même nom que l'exports ici
-}
+};
 
 /*
 exports.delete = id => {

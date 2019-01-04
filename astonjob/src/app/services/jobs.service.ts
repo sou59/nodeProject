@@ -20,7 +20,7 @@ export class JobsService {
    * Add a new job.
    */
   add(job: Job) {
-    return this.http.post(API_BASE_URL, job, {
+    return this.http.post(API_BASE_URL, job,  {
       withCredentials: true
     });
   }

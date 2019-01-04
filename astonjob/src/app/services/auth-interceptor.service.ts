@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-
 export class WithCredentialInterceptor implements HttpInterceptor {
     constructor() { }
 
@@ -13,8 +12,6 @@ export class WithCredentialInterceptor implements HttpInterceptor {
         request = request.clone({
             withCredentials: true
         });
-
-        request = request.clone();
         return next.handle(request);
     }
 }

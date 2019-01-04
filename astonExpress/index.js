@@ -43,7 +43,7 @@ sequelize = new Sequelize(conf.db.default.url, {
     //freezeTableName: true,
     operatorsAliases: false
 });
-
+ 
 sequelize
   .authenticate()
   .then(() => {
@@ -102,12 +102,12 @@ app.use(cookieParser());
 
 
 // Api
+api.use(cors(corsOptions));
 api.use(cookieParser());
 api.use(jwtCheck);
 // encodage de l'url : true on peut passer des objet dans l'url donc les objets complexes sont encodées
 api.use(bodyParser.urlencoded({ extended: true }));
 api.use(bodyParser.json());
-api.use(cors(corsOptions));
 
 // configuration du moteur de template pug
 app.set('view engine', 'pug');
