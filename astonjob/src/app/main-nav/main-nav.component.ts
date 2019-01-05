@@ -11,15 +11,22 @@ import { AuthService } from '../services/auth.service';
 })
 export class MainNavComponent implements OnInit {
 
+  constructor(private breakpointObserver: BreakpointObserver,
+    public auth: AuthService) {}
+
+  currentUser: AuthService;
+  isAuth: boolean; // état d'authentification
+  isLoggedIn: boolean;
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver,
-    public auth: AuthService) {}
 
   ngOnInit() {
+    this.isLoggedIn = this.auth.isLoggedIn();
   }
+
 
 }
