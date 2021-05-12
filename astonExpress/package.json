@@ -10,7 +10,7 @@
   "author": "Souad Zerhouni",
   "license": "MIT",
   "dependencies": {
-    "bcrypt": "^3.0.3",
+    "bcrypt": ">=5.0.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.3",
     "cookies": "^0.7.3",
