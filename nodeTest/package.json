@@ -5,7 +5,7 @@
   "main": "Image.js",
   "dependencies": {
     "markdown-it": "^8.4.2",
-    "marked": "^0.5.2",
+    "marked": ">=0.7.0",
     "marked-terminal": "^3.1.1",
     "remark-html": "^9.0.0",
     "remark-parse": "^6.0.3",
